@@ -4,8 +4,13 @@ import tkinter
 
 # Se define el frame principal y cambio de nombre
 root = Tk()
+<<<<<<< HEAD
 root.iconbitmap("../MalagaDVD/imagenes/python.ico")
 root.title("frmPrincipal")
+=======
+root.iconbitmap("../MalagaDVD/python.ico")
+root.title("frmPrincipal-nuevoTitulo")
+>>>>>>> cambianombre-frame
 
 # Se obtiene el acho y el alto de la pantalla del sistema
 ancho = root.winfo_screenwidth()
