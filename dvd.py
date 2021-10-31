@@ -4,7 +4,7 @@ import tkinter
 
 # Se define el frame principal
 root = Tk()
-root.iconbitmap("../MalagaDVD/python.ico")
+root.iconbitmap("../MalagaDVD/imagenes/python.ico")
 root.title("frmPrincipal")
 
 # Se obtiene el acho y el alto de la pantalla del sistema
