@@ -15,18 +15,21 @@ alto = root.winfo_screenheight()
 frmPrincipal = Frame(root, width=ancho, height=alto)
 frmPrincipal.pack()
 
-# Función para centrar ventan
+# SE define la clase principal
 
 
-def centrarVentana(ancho, alto):
-    ancho_ventana = ancho
-    alto_ventana = alto
-    x_ventana = root.winfo_screenwidth() // 2 - ancho_ventana // 2
-    y_ventana = root.winfo_screenheight() // 2 - alto_ventana // 2
-    posicion = str(ancho_ventana) + "x" + str(alto_ventana) + \
-        "+" + str(x_ventana) + "+" + str(y_ventana)
-    root.geometry(posicion)
-    root.resizable(0, 0)
+class principal():
+    # Función para centrar ventana
+
+    def centrarVentana(ancho, alto):
+        ancho_ventana = ancho
+        alto_ventana = alto
+        x_ventana = root.winfo_screenwidth() // 2 - ancho_ventana // 2
+        y_ventana = root.winfo_screenheight() // 2 - alto_ventana // 2
+        posicion = str(ancho_ventana) + "x" + str(alto_ventana) + \
+            "+" + str(x_ventana) + "+" + str(y_ventana)
+        root.geometry(posicion)
+        root.resizable(0, 0)
 
 
 # Instrucciones para establecer la barra de menu
@@ -53,6 +56,6 @@ mnubarEjemplares = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Ejemplares", menu=mnubarClientes)
 mnubarEjemplares.add_command(label="Formulario Ejemplares")
 
-centrarVentana(ancho-10, alto-10)
+principal.centrarVentana(ancho-10, alto-10)
 
 root.mainloop()
