@@ -2,7 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import tkinter
 
-# Se define el frame principal
+# Se define el frame principal y cambio de nombre
 root = Tk()
 root.iconbitmap("../MalagaDVD/imagenes/python.ico")
 root.title("frmPrincipal")
