@@ -1,10 +1,12 @@
+import re
 from tkinter import *
 from tkinter import messagebox
-import tkinter
+import mysql.connector as mysqlconn
+from mysql.connector.errors import ProgrammingError
 
-# Se define el frame principal y cambio de nombre
+# Se define el frame principal
 root = Tk()
-root.iconbitmap("../MalagaDVD/python.ico")
+root.iconbitmap("../MalagaDVD/imagenes/python.ico")
 root.title("frmPrincipal")
 
 # Se obtiene el acho y el alto de la pantalla del sistema
@@ -56,6 +58,29 @@ mnubarEjemplares = Menu(barraMenu, tearoff=0)
 barraMenu.add_cascade(label="Ejemplares", menu=mnubarClientes)
 mnubarEjemplares.add_command(label="Formulario Ejemplares")
 
-principal.centrarVentana(ancho-10, alto-10)
+# Creacion de los Botones CRUD
+frmBotones = Frame(frmPrincipal)
+frmBotones.configure(bg="light blue")
+frmBotones.pack(padx=10, pady=10)
+
+btnClientes = Button(frmBotones, text="Clientes", width=12, height=5)
+btnClientes.grid(column=0, row=0, padx=20, pady=20)
+
+btnActores = Button(frmBotones, text="Actores", width=12, height=5)
+btnActores.grid(column=0, row=1, padx=20, pady=20)
+
+btnProtagonistas = Button(frmBotones, text="Protagonistas", width=12, height=5)
+btnProtagonistas.grid(column=0, row=2, padx=20, pady=20)
+
+btnDirectores = Button(frmBotones, text="Directores", width=12, height=5)
+btnDirectores.grid(column=0, row=3, padx=20, pady=20)
+
+btnEjemplares = Button(frmBotones, text="Ejemplares", width=12, height=5)
+btnEjemplares.grid(column=0, row=4, padx=20, pady=20)
+
+btnInformes = Button(frmBotones, text="Informes", width=12, height=5)
+btnInformes.grid(column=0, row=5, padx=20, pady=20)
+
+principal.centrarVentana(ancho, alto)
 
 root.mainloop()
