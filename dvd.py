@@ -8,6 +8,7 @@ from mysql.connector.errors import ProgrammingError
 root = Tk()
 root.iconbitmap("../MalagaDVD/imagenes/python.ico")
 root.title("frmPrincipal")
+root.columnconfigure(2, weight=1)
 
 # Se obtiene el acho y el alto de la pantalla del sistema
 ancho = root.winfo_screenwidth()
@@ -15,7 +16,7 @@ alto = root.winfo_screenheight()
 
 # Creación del Frame donde se van a colocar todos los widgets
 frmPrincipal = Frame(root, width=ancho, height=alto)
-frmPrincipal.pack()
+frmPrincipal.grid()
 
 # SE define la clase principal
 
