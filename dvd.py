@@ -6,6 +6,7 @@ from mysql.connector.errors import ProgrammingError
 import sqlite3
 import tkinter.font as tkFont
 import tktabl
+from paphra_tktable import table
 
 # Se define el frame principal
 root = Tk()
@@ -19,13 +20,11 @@ alto = root.winfo_screenheight()
 # Creación del Frame donde se van a colocar todos los widgets
 frmPrincipal = Frame(root, width=ancho, height=alto)
 frmPrincipal.config(bg='green', bd=15, width=1500, height=800, padx=10)
-# frmPrincipal.pack(fill=X)
-frmPrincipal.grid(column=1, row=0)
+frmPrincipal.grid(column=1, row=0, sticky=NSEW, ipadx=10)
 
-frmGrilla = Frame(frmPrincipal, width=1700, height=900)
+frmGrilla = Frame(frmPrincipal, width=1650, height=900)
 frmGrilla.config(bg='red', bd=12)
-frmGrilla.grid(column=1, row=0)
-# frmGrilla.pack(side=RIGHT)
+frmGrilla.grid(column=1, row=0, sticky=N+S)
 
 
 # Se define la clase principal
@@ -42,11 +41,6 @@ class principal():
             "+" + str(x_ventana) + "+" + str(y_ventana)
         root.geometry(posicion)
         root.resizable(0, 0)
-
-    # def creacionGrilla(col, fil):
-        # Creación de la grilla principal
-        #tblPrincipal = tktabl.Table(frmPrincipal)
-        # tblPrincipal.pack()
 
     def numColTablas(tabla):
         try:
@@ -103,14 +97,12 @@ class principal():
             sql = "SELECT * FROM " + tabla
             mycursor.execute(sql)
             datos = mycursor.fetchall()
-
+            print(datos)
             mydb.commit()
             mydb.close()
 
             totalRows = len(datos)
             totalCols = len(datos[0])
-            print(totalRows)
-            print(totalCols)
 
             encabezado = ["Id Actor", "Nombre Actor", "Nacionalidad", "Sexo"]
             grilla = tktabl.Table(
@@ -122,10 +114,21 @@ class principal():
                                    fg='blue', font=('tahoma', 8, 'bold'))
                     grilla.grid(row=i, column=j)
                     grilla.insert(END, datos[i][j])
-            # messagebox.showinfo("Listado Tabla Actores",
-                    # "Consulta de actores realizada con éxito")
+
+            '''key_list = ['Id Actor', 'Nombre Actor', 'Nacionalidad', 'Sexo']
+            value_list = datos
+            dict_from_list = {k: v for k, v in zip(key_list, value_list)}
+            print("El diccionario es: ")
+            print(dict_from_list)'''
+
+            # Scrool Vertical grilla
+            '''scrollVert = Scrollbar(frmGrilla, command=grilla)
+            scrollVert.grid(row=0, column=5, sticky=NSEW)
+            grilla.config(yscrollcommand=scrollVert.set)'''
+
         except mysqlconn.ProgrammingError as e:
             messagebox.showwarning("Error Base de datos", e)
+
 
     # Instrucciones para establecer la barra de menu
 barraMenu = Menu(root)
@@ -156,7 +159,6 @@ mnubarEjemplares.add_command(label="Formulario Ejemplares")
 frmBotones = Frame(frmPrincipal)
 frmBotones.configure(bg="light blue")
 frmBotones.grid(sticky=W+N+S, column=0, row=0, padx=20)
-#frmBotones.pack(padx=10, pady=10, side='left')
 
 imgClientes = PhotoImage(file=r"../MalagaDVD/imagenes/clientes.png")
 btnClientes = Button(frmBotones, image=imgClientes, text="Clientes", compound="center",
