@@ -6,7 +6,7 @@ from mysql.connector.errors import ProgrammingError
 import sqlite3
 import tkinter.font as tkFont
 import tktabl
-from paphra_tktable import table
+
 
 # Se define el frame principal
 root = Tk()
@@ -97,23 +97,34 @@ class principal():
             sql = "SELECT * FROM " + tabla
             mycursor.execute(sql)
             datos = mycursor.fetchall()
-            print(datos)
+            # print(datos)
             mydb.commit()
             mydb.close()
 
             totalRows = len(datos)
             totalCols = len(datos[0])
 
+            resultado = {}
+            # for row in mycursor:
+            resultado = [{"Id Actor": col0, "Nombre Actor": col1, "Nacionalidad": col2, "sexo": col3} for (
+                col0, col1, col2, col3) in datos]
+
+            '''resultado = [{'Id Director': col0, 'Nombre Director': col1, 'Nacionalidad': col2} for (
+                col0, col1, col2) in datos]'''
+            print("El resultado es: ")
+            print(resultado)
+
             encabezado = ["Id Actor", "Nombre Actor", "Nacionalidad", "Sexo"]
             grilla = tktabl.Table(
-                frmGrilla, col=totalCols, row=totalRows, headers=encabezado)
+                frmGrilla, col=totalCols, row=totalRows, headers=encabezado, data=resultado)
+            grilla.pack()
             # code for creating table
-            for i in range(totalRows-1):
+            '''for i in range(totalRows-1):
                 for j in range(totalCols):
                     grilla = Entry(frmGrilla, width=20,
                                    fg='blue', font=('tahoma', 8, 'bold'))
                     grilla.grid(row=i, column=j)
-                    grilla.insert(END, datos[i][j])
+                    grilla.insert(END, datos[i][j])'''
 
             '''key_list = ['Id Actor', 'Nombre Actor', 'Nacionalidad', 'Sexo']
             value_list = datos
