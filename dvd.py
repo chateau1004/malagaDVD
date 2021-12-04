@@ -20,10 +20,10 @@ alto = root.winfo_screenheight()
 # Creación del Frame donde se van a colocar todos los widgets
 frmPrincipal = Frame(root, width=ancho, height=alto)
 frmPrincipal.config(bg='green', bd=15, width=1500, height=800, padx=10)
-frmPrincipal.grid(column=1, row=0, sticky=NSEW, ipadx=10)
+frmPrincipal.grid(column=0, row=0, sticky=NSEW, ipadx=10)
 
-frmGrilla = Frame(frmPrincipal, width=1650, height=900)
-frmGrilla.config(bg='red', bd=12)
+frmGrilla = Frame(frmPrincipal, width=1650, height=800)
+frmGrilla.config(bg='yellow', bd=12)
 frmGrilla.grid(column=1, row=0, sticky=N+S)
 
 
@@ -40,7 +40,7 @@ class principal():
         posicion = str(ancho_ventana) + "x" + str(alto_ventana) + \
             "+" + str(x_ventana) + "+" + str(y_ventana)
         root.geometry(posicion)
-        root.resizable(0, 0)
+        root.resizable(1, 1)
 
     def numColTablas(tabla):
         try:
@@ -122,7 +122,7 @@ class principal():
             '''for i in range(totalRows-1):
                 for j in range(totalCols):
                     grilla = Entry(frmGrilla, width=20,
-                                   fg='blue', font=('tahoma', 8, 'bold'))
+                                fg='blue', font=('tahoma', 8, 'bold'))
                     grilla.grid(row=i, column=j)
                     grilla.insert(END, datos[i][j])'''
 
@@ -133,9 +133,9 @@ class principal():
             print(dict_from_list)'''
 
             # Scrool Vertical grilla
-            '''scrollVert = Scrollbar(frmGrilla, command=grilla)
-            scrollVert.grid(row=0, column=5, sticky=NSEW)
-            grilla.config(yscrollcommand=scrollVert.set)'''
+            scrollVert = Scrollbar(frmPrincipal, command=grilla.pack())
+            scrollVert.grid(row=0, column=5, sticky=N+S+E+W)
+            grilla.config(yscrollcommand=scrollVert.set)
 
         except mysqlconn.ProgrammingError as e:
             messagebox.showwarning("Error Base de datos", e)
